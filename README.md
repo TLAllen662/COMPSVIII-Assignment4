@@ -47,7 +47,7 @@ docker build -t docker-demo-app:latest .
 - To run your docker container in port 3000 run the command:
 
 ```bash
-
+docker run -d -p 3000:3000 --name docker-demo-app docker-demo-app:latest
 ```
 
 ## Reflection Question
