@@ -53,7 +53,16 @@ docker run -d -p 3000:3000 --name docker-demo-app docker-demo-app:latest
 ## Reflection Question
 **Answer the following question in the space below**: How does containerization with Docker differ from using virtual machines, and why might a development team choose Docker containers over VMs for deploying applications like the one you just containerized?
 
+Docker containers and virtual machines both isolate applications, but they do so at different levels. A VM virtualizes an entire machine, including a full guest operating system and kernel, which is managed by a hypervisor. Each VM carries the overhead of its own OS, making VMs relatively large (often gigabytes), slow to boot (minutes), and resource-heavy. Docker containers, on the other hand, virtualize at the operating system level: they share the host machine's kernel and only package the application code, its dependencies, and a minimal set of libraries/binaries. This makes container images much smaller (megabytes), containers start in seconds (or less), and far more containers can run on the same hardware compared to VMs.
 
+For an app like the one containerized in this assignment (a small Node.js/Express application), a development team would likely choose Docker over VMs for several reasons:
+- **Speed and efficiency**: Containers start almost instantly and use less CPU/memory, letting the team run many instances (or other services) on the same host without the overhead of multiple full OS installs.
+- **Consistency across environments**: The Dockerfile captures the exact Node.js version, dependencies, and startup command, so the app runs identically on a developer's laptop, in CI, and in production — eliminating "it works on my machine" issues.
+- **Portability**: The resulting image can be pushed to a registry and run on any machine with Docker installed, regardless of the underlying OS, without needing to configure a VM image for each target platform.
+- **Simpler scaling and orchestration**: Lightweight containers are easier to scale horizontally and integrate with orchestration tools like Docker Compose or Kubernetes, which are well-suited to microservice-style Node.js apps.
+- **Faster CI/CD cycles**: Building and tearing down containers is quick, which speeds up automated testing and deployment pipelines compared to provisioning and destroying full VMs.
+
+VMs still have their place when you need to run different operating systems or require stronger isolation/security boundaries at the kernel level, but for deploying a self-contained web application like this one, Docker's lightweight, fast, and portable approach is generally the more practical choice.
 
 ## Application Requirements for Docker
 
