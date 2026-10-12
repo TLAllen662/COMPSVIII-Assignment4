@@ -41,7 +41,7 @@ Your task is to containerize this existing application using Docker. You need to
 - To build the docker image run the command:
 
 ```bash
-
+docker build -t docker-demo-app:latest .
 ```
 
 - To run your docker container in port 3000 run the command:
